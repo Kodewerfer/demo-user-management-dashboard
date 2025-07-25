@@ -8,12 +8,11 @@ import {
     UserCircleIcon,
     WalletIcon
 } from "@heroicons/react/16/solid";
-import Image from "next/image";
 import Link from "next/link";
 // ---shadcn
 import {
     Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
-    SidebarHeader, SidebarMenu, SidebarRail, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuButton, useSidebar
+    SidebarHeader, SidebarMenu, SidebarRail, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuButton
 } from "@/components/ui/sidebar"
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 
