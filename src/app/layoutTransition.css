@@ -1,0 +1,18 @@
+::view-transition-group(root) {
+    z-index: auto !important;
+}
+
+::view-transition-new(root) {
+    z-index: 2;
+    animation: none !important;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+    animation: none !important;
+}
+
+::view-transition-image-pair(root) {
+    isolation: isolate !important;
+    z-index: 1;
+}
