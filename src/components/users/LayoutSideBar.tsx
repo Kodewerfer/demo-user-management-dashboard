@@ -10,11 +10,12 @@ import {
 } from "@heroicons/react/16/solid";
 import Image from "next/image";
 import Link from "next/link";
-// shadcn sidebar
+// ---shadcn
 import {
     Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
     SidebarHeader, SidebarMenu, SidebarRail, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuButton, useSidebar
 } from "@/components/ui/sidebar"
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 
 // static mockup
 const ALL_SIDEBAR_OPTIONS = [
@@ -48,10 +49,10 @@ export default function UserCenterSideBar() {
     return (
         <Sidebar collapsible={'icon'}>
             <SidebarHeader className={'bg-primary-800 text-primary-200'}>
-                <div className="flex grow py-6 items-center justify-center">
+                <div className="flex grow  py-6 items-center justify-center">
                     
                     <div
-                        className={`bg-highlight-500 size-12 shrink-0 rounded-full flex items-center justify-center`}>
+                        className={`bg-highlight-500 aspect-square size-12 shrink-0 rounded-full flex items-center justify-center`}>
                         <span className="font-black text-primary-200 text-xs">LOGO</span>
                     </div>
                 
@@ -72,27 +73,28 @@ export default function UserCenterSideBar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className={'bg-primary-800 text-primary-200'}>
-                <div className="p-4 border-t border-primary-700">
-                    <div className="flex items-center">
+                <SidebarMenu>
+                    <SidebarMenuItem className={'border-t border-primary-700 py-3'}>
                         
-                        <Image src="https://randomuser.me/api/portraits/women/46.jpg"
-                               alt="Admin"
-                               quality={85}
-                               width={120}
-                               height={120}
-                               className="w-10 h-10 rounded-full"/>
+                        <SidebarMenuButton size="lg" className={"hover:bg-primary-700"}>
+                            <Avatar className={'w-10 h-10 rounded-lg'}>
+                                <AvatarImage src="https://randomuser.me/api/portraits/women/46.jpg" alt={'admin'}/>
+                                <AvatarFallback>U</AvatarFallback>
+                            </Avatar>
+                            
+                            <div className="grid flex-1 text-left text-sm leading-tight">
+                                <p className="font-medium truncate text-primary-300">Current User</p>
+                                <p className="text-sm text-primary-400 truncate">123@312.com</p>
+                            </div>
+                            
+                            <a href="#" className="ml-auto text-primary-400 hover:text-primary-200">
+                                <AdjustmentsHorizontalIcon className={"size-6"}/>
+                            </a>
                         
-                        <div className="ml-3">
-                            <p className="font-medium">Current User</p>
-                            <p className="text-sm text-primary-400">123@312.com</p>
-                        </div>
-                        
-                        <a href="#" className="ml-auto text-primary-400 hover:text-primary-200">
-                            <AdjustmentsHorizontalIcon className={"size-6"}/>
-                        </a>
+                        </SidebarMenuButton>
                     
-                    </div>
-                </div>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarFooter>
             <SidebarRail
                 className={"hover:bg-gradient-to-l hover:from-secondary-400 hover:to-primary-800"}/>
@@ -117,7 +119,7 @@ function SideBarContent({activeItemLabel, onItemClick}: {
             {sidebarOptions.map((option, index) => (
                 
                 <SidebarMenuItem key={index}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild size={"lg"}>
                         <SideBarItems
                             bIsActive={activeItemLabel === option.label}
                             ItemIcon={option.icon}
@@ -142,13 +144,11 @@ function SideBarItems({ItemIcon, itemLabel, OnClick, bIsActive}: {
 }) {
     
     return (
-        
         <Link href="/users"
               onPointerDown={(ev) => OnClick(ev, itemLabel)}
-              className={`${bIsActive && 'activeItem'} grow flex items-center p-3 text-primary-200 hover:bg-primary-800 rounded-lg [&.activeItem]:border-l-4 [&.activeItem]:border-l-secondary-500 [&.activeItem]:bg-secondary-800`}>
-            <ItemIcon className={`size-6 mr-3 shrink-0 `}/>
-            <span>{itemLabel}</span>
+              className={`${bIsActive && 'activeItem'} flex grow text-left items-center p-3 text-primary-200 hover:bg-primary-800 rounded-lg [&.activeItem]:border-l-2 [&.activeItem]:border-l-secondary-500 [&.activeItem]:bg-secondary-800`}>
+            <ItemIcon className={`size-6 shrink-0`}/>
+            <span className={"truncate pl-2 leading-loose text-nowrap"}>{itemLabel}</span>
         </Link>
-    
     )
 }
