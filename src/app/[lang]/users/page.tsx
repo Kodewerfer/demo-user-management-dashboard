@@ -67,15 +67,13 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                     
                     <React.Suspense fallback={<UserCardSkeleton count={20}/>}>
                         {bIsUserDataValid && userListFirstPage.results.map((user, index) => (
-                            <UserCard key={user.login.uuid} user={user}/>
+                            <UserCard key={user.login.uuid + Math.random()} user={user}/>
                         ))}
                     </React.Suspense>
                     
                     {bIsUserDataValid && userListFirstPage.info &&
-                        // <div
-                        //     className={"col-span-1 @xl/users-list:col-span-2 @5xl/users-list:col-span-4 @7xl/users-list:col-span-5"}>
-                        <LoadMoreUsers initialMetaData={userListFirstPage.info} loadAction={LoadMoreUsersAction}/>
-                        // </div>
+                        <LoadMoreUsers initialMetaData={userListFirstPage.info} loadAction={LoadMoreUsersAction}
+                                       className={'col-span-1 @xl/users-list:col-span-2 @5xl/users-list:col-span-4 @7xl/users-list:col-span-5'}/>
                     }
                 
                 </div>
@@ -195,7 +193,7 @@ async function LoadMoreUsersAction(page: number) {
     
     return {
         elements: newUsersList.results.map((user) => (
-            <UserCard key={user.login.uuid} user={user}/>
+            <UserCard key={user.login.uuid + Math.random()} user={user}/>
         ))
         , meta: newUsersList.info
     }

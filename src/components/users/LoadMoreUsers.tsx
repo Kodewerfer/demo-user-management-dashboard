@@ -84,7 +84,7 @@ export default function LoadMoreUsers({initialMetaData, loadAction, className}: 
                 bShouldShowIcon &&
                 <div
                     ref={inViewRef}
-                    className={`flex items-center justify-center py-4 w-full`}>
+                    className={`flex items-center justify-center py-4 w-full ${className}`}>
                     <ArrowPathIcon className={`h-10 w-10 animate-spin text-secondary-600`}/>
                 </div>
             }
