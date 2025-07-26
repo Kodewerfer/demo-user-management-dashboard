@@ -32,7 +32,7 @@ export type TUser = {
     nat: string;
 };
 
-export type Info = {
+export type TPagingInfo = {
     seed: string;
     results: number;
     page: number;
@@ -41,5 +41,5 @@ export type Info = {
 
 export type RandomUserResponse = {
     results: TUser[];
-    info: Info;
+    info: TPagingInfo;
 };

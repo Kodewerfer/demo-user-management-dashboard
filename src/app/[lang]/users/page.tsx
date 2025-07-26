@@ -1,6 +1,5 @@
 import React from "react";
 import {Metadata} from "next";
-import Link from "next/link";
 
 import {
     Card,
@@ -9,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import {Skeleton} from "@/components/ui/skeleton"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -23,6 +23,7 @@ import {Badge} from "@/components/ui/badge";
 import {MailIcon} from "lucide-react";
 import {fetchUserList} from "@/actions";
 import {TUser} from "@/types/Users";
+import LoadMoreUsers from "@/components/users/LoadMoreUsers";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -55,18 +56,26 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                 </div>
                 
                 
-                <div className={"flex items-center grow justify-center"}>
-                    <h4 className={"my-2 font-medium text-center text-primary-300 truncate"}>data provided by
+                <div className={"flex items-center grow justify-center h-12"}>
+                    <h4 className={"my-2 font-medium text-center text-primary-400 truncate"}>data provided by
                         https://randomuser.me/</h4>
                 </div>
                 
                 <div
-                    className={'grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/users-list:grid-cols-2 @5xl/users-list:grid-cols-4'}>
+                    className={'grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/users-list:grid-cols-2 @5xl/users-list:grid-cols-4 @7xl/users-list:grid-cols-5'}>
                     
-                    {bIsUserDataValid && userListFirstPage.results.map((user, index) => (
+                    
+                    <React.Suspense fallback={<UserCardSkeleton count={20}/>}>
+                        {bIsUserDataValid && userListFirstPage.results.map((user, index) => (
                             <UserCard key={user.login.uuid} user={user}/>
-                        )
-                    )
+                        ))}
+                    </React.Suspense>
+                    
+                    {bIsUserDataValid && userListFirstPage.info &&
+                        // <div
+                        //     className={"col-span-1 @xl/users-list:col-span-2 @5xl/users-list:col-span-4 @7xl/users-list:col-span-5"}>
+                        <LoadMoreUsers initialMetaData={userListFirstPage.info} loadAction={LoadMoreUsersAction}/>
+                        // </div>
                     }
                 
                 </div>
@@ -74,6 +83,37 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
             </div>
         </>
     )
+}
+
+function UserCardSkeleton({count = 1}: { count: number }) {
+    
+    return (
+        <>
+            {
+                Array.from({length: count}).map((_, index) => (
+                    <Card key={index}
+                          className="hover:shadow-lg transition-shadow duration-200 bg-primary-50 border border-primary-200">
+                        <CardHeader className="text-center pb-4 relative">
+                            <div className="flex flex-col items-center justify-center mb-4">
+                                
+                                <Skeleton className={'w-20 h-20 rounded-full mb-2'}/>
+                                
+                                <Skeleton className={'w-40 h-10 mb-10'}/>
+                            
+                            </div>
+                        
+                        </CardHeader>
+                        
+                        <CardContent className="space-y-3 pt-0">
+                            <Skeleton className={'w-full h-4 my-0.5'}/>
+                            <Skeleton className={'w-full h-4'}/>
+                        </CardContent>
+                    </Card>
+                ))
+            }
+        </>
+    )
+    
 }
 
 function UserCard({user}: { user: TUser }) {
@@ -138,4 +178,25 @@ function UserCard({user}: { user: TUser }) {
             </CardContent>
         </Card>
     )
+}
+
+async function LoadMoreUsersAction(page: number) {
+    'use server'
+    
+    if (!page) {
+        return null;
+    }
+    
+    const newUsersList = await fetchUserList(page);
+    
+    if (!newUsersList || !newUsersList.results) {
+        return null;
+    }
+    
+    return {
+        elements: newUsersList.results.map((user) => (
+            <UserCard key={user.login.uuid} user={user}/>
+        ))
+        , meta: newUsersList.info
+    }
 }
