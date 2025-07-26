@@ -40,7 +40,7 @@ export default function LoadMoreUsers({initialMetaData, loadAction, className}: 
         const actionResult = await loadAction(currentPage + 1);
         
         if (!actionResult) {
-            console.error("LoadMore Posts: Loading action result is empty", actionResult);
+            console.error("LoadMore: Loading action result is empty", actionResult);
             return;
         }
         

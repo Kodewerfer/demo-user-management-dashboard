@@ -23,6 +23,7 @@ export interface TUserLogin {
 }
 
 export type TUser = {
+    uuid: string; //added by action
     gender: string;
     login: TUserLogin;
     name: TUserName;
@@ -39,7 +40,7 @@ export type TPagingInfo = {
     version: string;
 };
 
-export type RandomUserResponse = {
+export type TRandomUserResponse = {
     results: TUser[];
     info: TPagingInfo;
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import {Metadata} from "next";
 
+
 import {
     Card,
     CardAction,
@@ -66,8 +67,8 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                     
                     
                     <React.Suspense fallback={<UserCardSkeleton count={20}/>}>
-                        {bIsUserDataValid && userListFirstPage.results.map((user, index) => (
-                            <UserCard key={user.login.uuid + Math.random()} user={user}/>
+                        {bIsUserDataValid && userListFirstPage.results.map((user) => (
+                            <UserCard key={user.uuid} user={user}/> //limitation of the rando api, their uuid may be duplicated.
                         ))}
                     </React.Suspense>
                     
@@ -94,9 +95,9 @@ function UserCardSkeleton({count = 1}: { count: number }) {
                         <CardHeader className="text-center pb-4 relative">
                             <div className="flex flex-col items-center justify-center mb-4">
                                 
-                                <Skeleton className={'w-20 h-20 rounded-full mb-2'}/>
+                                <Skeleton className={'w-20 h-20 rounded-full mb-4'}/>
                                 
-                                <Skeleton className={'w-40 h-10 mb-10'}/>
+                                <Skeleton className={'w-40 h-8 mb-10'}/>
                             
                             </div>
                         
