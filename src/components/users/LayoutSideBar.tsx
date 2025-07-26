@@ -12,7 +12,7 @@ import Link from "next/link";
 // ---shadcn
 import {
     Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
-    SidebarHeader, SidebarMenu, SidebarRail, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuButton
+    SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuButton
 } from "@/components/ui/sidebar"
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 
@@ -46,8 +46,8 @@ export default function UserCenterSideBar() {
     }, []);
     
     return (
-        <Sidebar collapsible={'icon'}>
-            <SidebarHeader className={'bg-primary-800 text-primary-200'}>
+        <Sidebar collapsible={'icon'} variant={'inset'}>
+            <SidebarHeader className={'text-primary-200'}>
                 <div className="flex grow  py-6 items-center justify-center">
                     
                     <div
@@ -57,7 +57,7 @@ export default function UserCenterSideBar() {
                 
                 </div>
             </SidebarHeader>
-            <SidebarContent className={'bg-primary-800 text-primary-200'}>
+            <SidebarContent className={'text-primary-200'}>
                 <SidebarGroup>
                     {/*<SidebarGroupLabel className={'text-primary-200'}>User</SidebarGroupLabel>*/}
                     <SidebarGroupContent>
@@ -71,7 +71,7 @@ export default function UserCenterSideBar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter className={'bg-primary-800 text-primary-200'}>
+            <SidebarFooter className={'text-primary-200'}>
                 <SidebarMenu>
                     <SidebarMenuItem className={'border-t border-primary-700 py-3'}>
                         
@@ -95,8 +95,6 @@ export default function UserCenterSideBar() {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>
-            <SidebarRail
-                className={"hover:bg-gradient-to-l hover:from-secondary-400 hover:to-primary-800"}/>
         </Sidebar>
     )
 }

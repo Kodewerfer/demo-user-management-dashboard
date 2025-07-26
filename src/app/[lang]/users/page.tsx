@@ -45,7 +45,7 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     
     return (
         <>
-            <div className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden">
+            <div className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg">
                 
                 <div className="px-4 py-3 my-3 flex flex-row-reverse">
                     <div className={"flex items-center"}>
@@ -58,7 +58,7 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                 </div>
                 
                 
-                <div className={"flex items-center grow justify-center h-12"}>
+                <div className={"flex items-center grow justify-center h-12 max-h-12"}>
                     <h4 className={"my-2 font-medium text-center text-primary-400 truncate"}>data provided by
                         https://randomuser.me/</h4>
                 </div>

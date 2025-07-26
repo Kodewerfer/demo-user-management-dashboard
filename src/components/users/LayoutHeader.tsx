@@ -5,7 +5,7 @@ import {Separator} from "@/components/ui/separator";
 
 export default function LayoutHeader() {
     return (
-        <header className="h-16 bg-primary-50 shadow-sm w-full">
+        <header className="h-16 bg-primary-50 shadow-sm w-full rounded-tr-lg rounded-tl-lg">
             <div className="flex justify-between items-center p-4 shrink-0 h-full gap-2">
                 
                 <div className="flex items-center">

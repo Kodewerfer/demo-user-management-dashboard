@@ -8,7 +8,7 @@ export default async function UserCenterLayout({children,}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <div className="flex w-full h-screen bg-primary-50">
+        <div className="flex w-full h-screen">
             <SidebarProvider>
                 <UserCenterSideBar/>
                 <SidebarInset>
