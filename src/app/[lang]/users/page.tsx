@@ -21,6 +21,8 @@ import {ChevronDownIcon, GlobeAltIcon, MagnifyingGlassIcon, PhoneIcon} from "@he
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import {MailIcon} from "lucide-react";
+import {fetchUserList} from "@/actions";
+import {TUser} from "@/types/Users";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -35,9 +37,12 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     
     void lang; //todo:Add I18n support;
     
+    const userListFirstPage = await fetchUserList(1);
+    const bIsUserDataValid = userListFirstPage && Array.isArray(userListFirstPage.results);
+    
     return (
         <>
-            <div className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100">
+            <div className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden">
                 
                 <div className="px-4 py-3 my-3 flex flex-row-reverse">
                     <div className={"flex items-center"}>
@@ -49,14 +54,20 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                     </div>
                 </div>
                 
+                
+                <div className={"flex items-center grow justify-center"}>
+                    <h4 className={"my-2 font-medium text-center text-primary-300 truncate"}>data provided by
+                        https://randomuser.me/</h4>
+                </div>
+                
                 <div
                     className={'grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/users-list:grid-cols-2 @5xl/users-list:grid-cols-4'}>
                     
-                    <UserCard/>
-                    <UserCard/>
-                    <UserCard/>
-                    <UserCard/>
-                    <UserCard/>
+                    {bIsUserDataValid && userListFirstPage.results.map((user, index) => (
+                            <UserCard key={user.login.uuid} user={user}/>
+                        )
+                    )
+                    }
                 
                 </div>
             
@@ -65,24 +76,25 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     )
 }
 
-function UserCard() {
+function UserCard({user}: { user: TUser }) {
     return (
         <Card className="hover:shadow-lg transition-shadow duration-200 bg-primary-50 border border-primary-200">
             <CardHeader className="text-center pb-4 relative">
                 <div className="flex flex-col items-center justify-center mb-4">
                     <Avatar className="w-20 h-20 select-none border-2 border-primary-200">
-                        <AvatarImage src={"https://randomuser.me/api/portraits/women/42.jpg"} alt={""}/>
+                        <AvatarImage src={user.picture.medium} alt={""}/>
                         <AvatarFallback className="text-lg font-semibold bg-primary-100 text-primary-800">
-                            {"AABBCC"}
+                            {user.name.first}
                         </AvatarFallback>
                     </Avatar>
                     <CardTitle className="text-xl font-semibold text-primary-900 truncate mt-2">
-                        AABBCC
+                        {user.name.first} {user.name.last}
                     </CardTitle>
                     <div className="flex justify-center mt-2">
-                        <Badge className="text-sm bg-secondary-100 select-none text-secondary-800 hover:bg-secondary-200 px-2 py-1">
+                        <Badge
+                            className="text-sm bg-secondary-100 select-none text-secondary-800 hover:bg-secondary-200 px-2 py-1">
                             <GlobeAltIcon className="w-3 h-3 mr-1 text-secondary-600"/>
-                            <span className="truncate">CA</span>
+                            <span className="truncate">{user.nat}</span>
                         </Badge>
                     </div>
                 </div>
@@ -116,12 +128,12 @@ function UserCard() {
             <CardContent className="space-y-3 pt-0">
                 <div className="flex items-center text-primary-700">
                     <MailIcon className="w-4 h-4 mr-3 text-primary-500 flex-shrink-0"/>
-                    <span className="text-sm truncate">aaa@aa.com</span>
+                    <span className="text-sm truncate">{user.email}</span>
                 </div>
                 
                 <div className="flex items-center text-primary-700">
                     <PhoneIcon className="w-4 h-4 mr-3 text-primary-500 flex-shrink-0"/>
-                    <span className="text-sm truncate">1231231231</span>
+                    <span className="text-sm truncate">{user.phone}</span>
                 </div>
             </CardContent>
         </Card>
