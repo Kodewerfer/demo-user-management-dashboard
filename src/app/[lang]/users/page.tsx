@@ -25,6 +25,7 @@ import {MailIcon} from "lucide-react";
 import {fetchUserList} from "@/actions";
 import {TUser} from "@/types/Users";
 import LoadMoreUsers from "@/components/users/LoadMoreUsers";
+import ProfileDetailLink from "@/components/users/ProfileLink";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -120,15 +121,22 @@ function UserCard({user}: { user: TUser }) {
         <Card className="hover:shadow-lg transition-shadow duration-200 bg-primary-50 border border-primary-200">
             <CardHeader className="text-center pb-4 relative">
                 <div className="flex flex-col items-center justify-center mb-4">
+                    
                     <Avatar className="w-20 h-20 select-none border-2 border-primary-200">
-                        <AvatarImage src={user.picture.medium} alt={""}/>
-                        <AvatarFallback className="text-lg font-semibold bg-primary-100 text-primary-800">
-                            {user.name.first}
-                        </AvatarFallback>
+                        <ProfileDetailLink user={user}>
+                            <AvatarImage src={user.picture.medium} alt={""}/>
+                            <AvatarFallback className="text-lg font-semibold bg-primary-100 text-primary-800">
+                                {user.name.first}
+                            </AvatarFallback>
+                        </ProfileDetailLink>
                     </Avatar>
+                    
                     <CardTitle className="text-xl font-semibold text-primary-900 truncate mt-2">
-                        {user.name.first} {user.name.last}
+                        <ProfileDetailLink user={user}>
+                            <span>{user.name.first}</span> <span>{user.name.last}</span>
+                        </ProfileDetailLink>
                     </CardTitle>
+                    
                     <div className="flex justify-center mt-2">
                         <Badge
                             className="text-sm bg-secondary-100 select-none text-secondary-800 hover:bg-secondary-200 px-2 py-1">
