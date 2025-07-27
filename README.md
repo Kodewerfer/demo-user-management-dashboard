@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJs User Management Dashboard Demo
 
-## Getting Started
+### [Online DEMO](https://demo-user-management-dashboard.vercel.app/)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About The Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Demo Features:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* list - detail pages
+* secondary layout with sidebar and header
+* Listing page infinite scrolling
+* ViewTransition based animation
+* full responsive UI
+* ~~That I am in too deep with Vercel+next+shadcn~~
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Unimplemented features:
+* Listing page scrolling position cache
+* full i18n support
+* forms with zod validation(use React Hook Form)
 
-## Learn More
+### Built With
 
-To learn more about Next.js, take a look at the following resources:
+* [![TypeScript][typescript-badge]][typescript-url]
+* [![Next.js][nextjs-badge]][nextjs-url]
+* [![shadcn][shadcn-badge]][shadcn-url]
+* [![randomuser.me][randomuser-badge]][randomuser-url]
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+[typescript-badge]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[nextjs-badge]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[nextjs-url]: https://nextjs.org/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[shadcn-badge]: https://img.shields.io/badge/shadcn-0A0A0A?style=for-the-badge&logo=radixui&logoColor=white
+[shadcn-url]: https://ui.shadcn.com/
+
+[randomuser-badge]: https://img.shields.io/badge/randomuser.me-4A90E2?style=for-the-badge&logo=randomuser.me&logoColor=white
+[randomuser-url]: https://randomuser.me/
