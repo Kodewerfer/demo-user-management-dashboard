@@ -61,7 +61,7 @@ export default function LoadMoreUsers({initialMetaData, loadAction, className}: 
         
         console.info("Viewing end of the current page");
         
-        loadAdditionalUsers();
+        loadAdditionalUsers().then();
         
     }, [inView, loadAdditionalUsers]);
     

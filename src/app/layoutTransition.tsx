@@ -6,13 +6,9 @@ import ViewTransition from "@/components/ViewTransitionWrapper";
 
 export default function LayoutTransition({children}: { children: React.ReactNode }) {
     
-    const DefaultExitAnimation = {
-        opacity: [1, 0],
-    }
+    const DefaultExitAnimation = {}
     
-    const DefaultEnterAnimation = {
-        opacity: [0, 1],
-    }
+    const DefaultEnterAnimation = {}
     
     return (
         <>

@@ -25,7 +25,7 @@ import {MailIcon} from "lucide-react";
 import {fetchUserList} from "@/actions";
 import {TUser} from "@/types/Users";
 import LoadMoreUsers from "@/components/users/LoadMoreUsers";
-import ProfileDetailLink from "@/components/users/ProfileLink";
+import ProfileDetailLink from "@/components/users/ProfileDetailLink";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -45,7 +45,8 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     
     return (
         <>
-            <div className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg">
+            <div
+                className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg ring-0 ">
                 
                 <div className="px-4 py-3 my-3 flex flex-row-reverse">
                     <div className={"flex items-center"}>
@@ -116,20 +117,20 @@ function UserCardSkeleton({count = 1}: { count: number }) {
     
 }
 
-function UserCard({user}: { user: TUser }) {
+export function UserCard({user}: { user: TUser }) {
     return (
         <Card className="hover:shadow-lg transition-shadow duration-200 bg-primary-50 border border-primary-200">
             <CardHeader className="text-center pb-4 relative">
                 <div className="flex flex-col items-center justify-center mb-4">
                     
-                    <Avatar className="w-20 h-20 select-none border-2 border-primary-200">
-                        <ProfileDetailLink user={user}>
+                    <ProfileDetailLink user={user}>
+                        <Avatar className="w-20 h-20 select-none border-2 border-primary-200">
                             <AvatarImage src={user.picture.medium} alt={""}/>
                             <AvatarFallback className="text-lg font-semibold bg-primary-100 text-primary-800">
                                 {user.name.first}
                             </AvatarFallback>
-                        </ProfileDetailLink>
-                    </Avatar>
+                        </Avatar>
+                    </ProfileDetailLink>
                     
                     <CardTitle className="text-xl font-semibold text-primary-900 truncate mt-2">
                         <ProfileDetailLink user={user}>
@@ -146,7 +147,7 @@ function UserCard({user}: { user: TUser }) {
                     </div>
                 </div>
                 
-                <CardAction className="absolute top-4 right-4">
+                <CardAction className="absolute top-0 right-4">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <button
@@ -161,11 +162,11 @@ function UserCard({user}: { user: TUser }) {
                             <DropdownMenuSeparator className="bg-primary-200"/>
                             <DropdownMenuItem
                                 className="px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
-                                Profile
+                                <ProfileDetailLink user={user}>Profile</ProfileDetailLink>
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 className="px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
-                                Subscription
+                                Subscribe
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

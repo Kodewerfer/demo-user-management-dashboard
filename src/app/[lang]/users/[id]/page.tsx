@@ -1,6 +1,11 @@
 import React from "react";
 import {Metadata} from "next";
 
+import {TUser} from "@/types/Users";
+import UserProfile from "@/components/users/UserProfile";
+import {_FAKE_fetchUserFromID} from "@/actions";
+import UserProfileSkeleton from "@/components/users/UserProfileSkeleton";
+
 export async function generateMetadata({params}: {
     params: Promise<{ id: string }>
 }): Promise<Metadata> {
@@ -21,7 +26,7 @@ export default async function UserDetail({params}: { params: Promise<{ id: strin
             
             
             <div
-                className="@container/users-details flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg">
+                className="@container/user-details flex-1 flex flex-col w-full items-center justify-start p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg">
                 
                 
                 <div className={"flex items-center grow justify-center h-12 max-h-12"}>
@@ -30,8 +35,11 @@ export default async function UserDetail({params}: { params: Promise<{ id: strin
                 </div>
                 
                 <div
-                    className={'grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/users-details:grid-cols-2 @5xl/users-details:grid-cols-4 @7xl/users-list:grid-cols-5'}>
-                    <h1>checking user {UserID}</h1>
+                    className={'w-full @lg/user-details:w-2/3 @xl/user-details:w-1/2'}>
+                    
+                    <React.Suspense fallback={<UserProfileSkeleton/>}>
+                        <UserProfile userID={UserID} loadUserAction={LoadSingleUserAction}/>
+                    </React.Suspense>
                 
                 </div>
             
@@ -39,4 +47,10 @@ export default async function UserDetail({params}: { params: Promise<{ id: strin
         
         </>
     )
+}
+
+
+async function LoadSingleUserAction(userID: string): Promise<TUser | null> {
+    'use server'
+    return await _FAKE_fetchUserFromID(userID);
 }
