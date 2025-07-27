@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from "react";
 import {TUser} from "@/types/Users";
 
-import {useStore} from "@/zustand/Store";
+import {useUserStore} from "@/zustand/Store";
 
 import {Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
@@ -17,8 +17,8 @@ export default function UserProfile({userID, loadUserAction}: {
     loadUserAction: (userID: string) => Promise<TUser | null>
 }) {
     
-    const {itemCache} = useStore();
-    const userFromCache = itemCache[userID];
+    const {cachedUsers} = useUserStore();
+    const userFromCache = cachedUsers[userID];
     
     const [displayingUser, setDisplayingUser] = useState<TUser | null | undefined>(userFromCache);
     

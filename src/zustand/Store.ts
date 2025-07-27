@@ -3,13 +3,13 @@ import {TUser} from "@/types/Users";
 
 
 type Store = {
-    itemCache: Record<string, TUser>;
-    cacheItem: (item: TUser) => void;
+    cachedUsers: Record<string, TUser>;
+    cacheUserByUUID: (item: TUser) => void;
 };
 
-export const useStore = create<Store>((set) => ({
-    itemCache: {},
-    cacheItem: (item) => set((state) => ({
-        itemCache: {...state.itemCache, [item.uuid]: item}
+export const useUserStore = create<Store>((set) => ({
+    cachedUsers: {},
+    cacheUserByUUID: (item) => set((state) => ({
+        cachedUsers: {...state.cachedUsers, [item.uuid]: item}
     })),
 }));

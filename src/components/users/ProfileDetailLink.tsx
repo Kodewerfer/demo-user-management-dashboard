@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import {TUser} from "@/types/Users";
-import {useStore} from "@/zustand/Store";
+import {useUserStore} from "@/zustand/Store";
 
 export default function ProfileDetailLink({user, children, className}: {
     user: TUser,
@@ -11,12 +11,12 @@ export default function ProfileDetailLink({user, children, className}: {
     className?: string
 }) {
     
-    const {cacheItem} = useStore();
+    const {cacheUserByUUID} = useUserStore();
     
     return (
         <Link
             href={`/users/${user.uuid}`}
-            onPointerDown={() => cacheItem(user)}
+            onPointerDown={() => cacheUserByUUID(user)}
             className={className}
         >
             {children}
