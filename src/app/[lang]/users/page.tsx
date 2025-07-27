@@ -73,7 +73,7 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                     
                     
                     <React.Suspense fallback={<UserCardSkeleton count={20}/>}>
-                        {bIsUserDataValid && userListFirstPage.results.map((user) => (
+                        {bIsUserDataValid && userListFirstPage.results.map((user: TUser) => (
                             <UserCard key={user.uuid} user={user}/> //limitation of the rando api, their uuid may be duplicated.
                         ))}
                     </React.Suspense>
@@ -90,7 +90,7 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     )
 }
 
-function UserCardSkeleton({count = 1}: { count: number }) {
+async function UserCardSkeleton({count = 1}: { count: number }) {
     
     return (
         <>
@@ -121,7 +121,7 @@ function UserCardSkeleton({count = 1}: { count: number }) {
     
 }
 
-export function UserCard({user}: { user: TUser }) {
+async function UserCard({user}: { user: TUser }) {
     return (
         <Card className="hover:shadow-lg transition-shadow duration-200 bg-primary-50 border border-primary-200">
             <CardHeader className="text-center pb-4 relative">
