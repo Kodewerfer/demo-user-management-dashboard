@@ -27,6 +27,8 @@ import {TUser} from "@/types/Users";
 import LoadMoreUsers from "@/components/users/LoadMoreUsers";
 import ProfileDetailLink from "@/components/users/ProfileDetailLink";
 
+import {Input} from "@/components/ui/input";
+
 export async function generateMetadata(): Promise<Metadata> {
     return {
         title: "Demo - User Management Dashboard",
@@ -51,8 +53,10 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                 <div className="px-4 py-3 my-3 flex flex-row-reverse">
                     <div className={"flex items-center"}>
                         <div className="relative">
-                            <input type="text" placeholder="Search..."
-                                   className="bg-primary-50 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-secondary-300 text-primary-900"/>
+                            <Input type="text"
+                                   placeholder="Search..."
+                                   disabled={true}
+                                   className="bg-primary-50 rounded-lg py-2 px-4 pl-10 text-primary-900"/>
                             <MagnifyingGlassIcon className="absolute left-3 top-3 text-primary-400 size-4"/>
                         </div>
                     </div>
@@ -132,6 +136,7 @@ export function UserCard({user}: { user: TUser }) {
                         </Avatar>
                     </ProfileDetailLink>
                     
+                    
                     <CardTitle className="text-xl font-semibold text-primary-900 truncate mt-2">
                         <ProfileDetailLink user={user}>
                             <span>{user.name.first}</span> <span>{user.name.last}</span>
@@ -155,14 +160,16 @@ export function UserCard({user}: { user: TUser }) {
                                 <ChevronDownIcon className="size-5 text-primary-600"/>
                             </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-primary-50 border border-primary-200 text-primary-800 w-48">
+                        <DropdownMenuContent
+                            className="bg-primary-50 border border-primary-200 text-primary-800 w-48">
                             <DropdownMenuLabel className="text-primary-900 px-3 py-2 font-medium">
                                 Actions
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator className="bg-primary-200"/>
                             <DropdownMenuItem
-                                className="px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
-                                <ProfileDetailLink user={user}>Profile</ProfileDetailLink>
+                                className="relative px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
+                                <ProfileDetailLink user={user} className={"absolute w-full h-full top-0 left-0"}/>
+                                Profile
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 className="px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">

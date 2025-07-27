@@ -5,7 +5,11 @@ import Link from "next/link";
 import {TUser} from "@/types/Users";
 import {useStore} from "@/zustand/Store";
 
-export default function ProfileDetailLink({user, children}: { user: TUser, children: React.ReactNode }) {
+export default function ProfileDetailLink({user, children, className}: {
+    user: TUser,
+    children?: React.ReactNode,
+    className?: string
+}) {
     
     const {cacheItem} = useStore();
     
@@ -13,6 +17,7 @@ export default function ProfileDetailLink({user, children}: { user: TUser, child
         <Link
             href={`/users/${user.uuid}`}
             onPointerDown={() => cacheItem(user)}
+            className={className}
         >
             {children}
         </Link>

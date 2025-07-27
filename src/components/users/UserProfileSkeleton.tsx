@@ -1,17 +1,21 @@
+import React from "react";
 import {Card, CardContent, CardDescription, CardHeader} from "@/components/ui/card";
 import {Skeleton} from "@/components/ui/skeleton";
 import {Badge} from "@/components/ui/badge";
 import {GlobeAltIcon} from "@heroicons/react/16/solid";
-import React from "react";
 
-export default function UserProfileSkeleton() {
+export default function UserProfileSkeleton({loadingUserFromID = " "}: { loadingUserFromID?: string }) {
+    
+    void loadingUserFromID;
+    
     return (
         <Card
             className="@container/card-wrapper duration-200 bg-primary-50 border border-primary-200">
             <CardHeader className="text-center pb-0 relative">
                 <div className="flex flex-col items-center justify-center mb-4">
                     
-                    <Skeleton className="w-20 h-20 rounded-full select-none border-2 border-primary-200"/>
+                    <Skeleton className="w-40 h-40 rounded-full select-none border-2 border-primary-200"/>
+                    
                     
                     <CardDescription>
                         <p className={"truncate text-lg font-medium py-2"}>Hi, My name is</p>

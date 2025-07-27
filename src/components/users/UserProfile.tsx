@@ -39,12 +39,13 @@ export default function UserProfile({userID, loadUserAction}: {
                     <CardHeader className="text-center pb-0 relative">
                         <div className="flex flex-col items-center justify-center mb-4">
                             
-                            <Avatar className="w-20 h-20 select-none border-2 border-primary-200">
-                                <AvatarImage src={displayingUser.picture.medium} alt={""}/>
+                            <Avatar className="w-40 h-40 select-none border-2 border-primary-200">
+                                <AvatarImage src={displayingUser.picture.large} alt={""}/>
                                 <AvatarFallback className="text-lg font-semibold bg-primary-100 text-primary-800">
                                     {displayingUser.name.first}
                                 </AvatarFallback>
                             </Avatar>
+                            
                             
                             <CardDescription>
                                 <p className={"truncate text-lg font-medium py-2"}>Hi, My name is</p>
@@ -91,10 +92,8 @@ export default function UserProfile({userID, loadUserAction}: {
                         </div>
                     </CardContent>
                 </Card>
-                
                 :
-                
-                <UserProfileSkeleton/>
+                <UserProfileSkeleton loadingUserFromID={userID}/>
             }
         </>
     )
