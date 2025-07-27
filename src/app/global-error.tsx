@@ -1,18 +1,27 @@
-'use client'
+'use client';
 
-export default function GlobalError({error, reset,}: {
-    error: Error & { digest?: string }
-    reset: () => void
+import {useRouter} from 'next/navigation';
+import ErrorHandlingComponent from "@/components/ErrorHandlingComponent";
+
+export default function GlobalError({
+                                        error,
+                                        reset,
+                                    }: {
+    error: Error & { digest?: string };
+    reset: () => void;
 }) {
-    
-    void error;
+    const router = useRouter();
     
     return (
         <html>
-        <body>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <body className="bg-primary-50 min-h-screen flex flex-col">
+        
+        <div className="flex-1 flex flex-col overflow-hidden">
+            
+            {ErrorHandlingComponent(error, reset, router)}
+        </div>
+        
         </body>
         </html>
-    )
+    );
 }

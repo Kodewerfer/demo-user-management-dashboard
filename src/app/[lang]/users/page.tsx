@@ -43,7 +43,6 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
     
     const userListFirstPage = await fetchUserList(1);
     const bIsUserDataValid = userListFirstPage && Array.isArray(userListFirstPage.results);
-    
     return (
         <>
             <div
