@@ -7,11 +7,12 @@ import {useUserStore} from "@/zustand/Store";
 import {Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
-import {GlobeAltIcon, PhoneIcon} from "@heroicons/react/16/solid";
+import {ArrowUturnLeftIcon, GlobeAltIcon, PhoneIcon} from "@heroicons/react/16/solid";
 import {MailIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import UserProfileSkeleton from "@/components/users/UserProfileSkeleton";
 import {toast} from "sonner";
+import Link from "next/link";
 
 export default function UserProfile({userID, loadUserAction}: {
     userID: string,
@@ -65,6 +66,14 @@ export default function UserProfile({userID, loadUserAction}: {
                             </div>
                         </div>
                         
+                        <div
+                            className="absolute top-0 left-4">
+                            <Link href={'/users'}
+                                  className={"font-medium text-lg text-primary-600 hover:text-secondary-600"}>
+                                <ArrowUturnLeftIcon className={"size-6"}/>
+                            </Link>
+                        </div>
+                        
                         <CardAction
                             className="absolute top-0 right-4 @lg/card-wrapper:right-10 @xl/card-wrapper:right-12">
                             <Button className={"bg-highlight-600 hover:bg-highlight-800 py-1 px-2"}
@@ -81,6 +90,7 @@ export default function UserProfile({userID, loadUserAction}: {
                                 <span className={"truncate w-full"}>Subscribe</span>
                             </Button>
                         </CardAction>
+                    
                     
                     </CardHeader>
                     
