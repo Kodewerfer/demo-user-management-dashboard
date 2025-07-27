@@ -11,6 +11,7 @@ import {GlobeAltIcon, PhoneIcon} from "@heroicons/react/16/solid";
 import {MailIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import UserProfileSkeleton from "@/components/users/UserProfileSkeleton";
+import {toast} from "sonner";
 
 export default function UserProfile({userID, loadUserAction}: {
     userID: string,
@@ -52,8 +53,7 @@ export default function UserProfile({userID, loadUserAction}: {
                             </CardDescription>
                             
                             <CardTitle className="text-xl font-semibold text-primary-900 truncate">
-                                <span>{displayingUser.name.title}</span> . <span>{displayingUser.name.first}</span>
-                                <span>{displayingUser.name.last}</span>
+                                <span>{displayingUser.name.title}</span>. <span>{displayingUser.name.first} {displayingUser.name.last}</span>
                             </CardTitle>
                             
                             <div className="flex justify-center mt-4">
@@ -67,7 +67,17 @@ export default function UserProfile({userID, loadUserAction}: {
                         
                         <CardAction
                             className="absolute top-0 right-4 @lg/card-wrapper:right-10 @xl/card-wrapper:right-12">
-                            <Button className={"bg-highlight-600 hover:bg-highlight-800 py-1 px-2"}>
+                            <Button className={"bg-highlight-600 hover:bg-highlight-800 py-1 px-2"}
+                                    onClick={() => {
+                                        toast(`*Beep* Subscribed to ${displayingUser.name.first}`, {
+                                            action: {
+                                                label: "Done",
+                                                onClick: () => {
+                                                }
+                                            },
+                                        })
+                                    }}
+                            >
                                 <span className={"truncate w-full"}>Subscribe</span>
                             </Button>
                         </CardAction>

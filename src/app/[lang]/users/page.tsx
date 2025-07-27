@@ -18,7 +18,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {ChevronDownIcon, GlobeAltIcon, MagnifyingGlassIcon, PhoneIcon} from "@heroicons/react/16/solid";
+import {ChevronDownIcon, GlobeAltIcon, PhoneIcon} from "@heroicons/react/16/solid";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import {MailIcon} from "lucide-react";
@@ -26,8 +26,7 @@ import {fetchUserList} from "@/actions";
 import {TUser} from "@/types/Users";
 import LoadMoreUsers from "@/components/users/LoadMoreUsers";
 import ProfileDetailLink from "@/components/users/ProfileDetailLink";
-
-import {Input} from "@/components/ui/input";
+import ListPageSearch from "@/components/users/ListPageSearch";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -51,15 +50,7 @@ export default async function UserDashboard({params}: { params: Promise<{ lang: 
                 className="@container/users-list flex-1 flex flex-col w-full p-3 bg-primary-100 overflow-x-hidden rounded-br-lg rounded-bl-lg ring-0 ">
                 
                 <div className="px-4 py-3 my-3 flex flex-row-reverse">
-                    <div className={"flex items-center"}>
-                        <div className="relative">
-                            <Input type="text"
-                                   placeholder="Search..."
-                                   disabled={true}
-                                   className="bg-primary-50 rounded-lg py-2 px-4 pl-10 text-primary-900"/>
-                            <MagnifyingGlassIcon className="absolute left-3 top-3 text-primary-400 size-4"/>
-                        </div>
-                    </div>
+                    <ListPageSearch/>
                 </div>
                 
                 
@@ -170,10 +161,6 @@ async function UserCard({user}: { user: TUser }) {
                                 className="relative px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
                                 <ProfileDetailLink user={user} className={"absolute w-full h-full top-0 left-0"}/>
                                 Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                className="px-3 py-2 hover:bg-primary-100 focus:bg-accent-50 focus:text-accent-700 cursor-pointer">
-                                Subscribe
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
